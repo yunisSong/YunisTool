@@ -16,7 +16,6 @@ public struct BlogPost {
     
 
     //新建文件
-    
     public func creatNewPost()
     {
         //获取当前路径
@@ -74,7 +73,7 @@ public struct BlogPost {
         "header-mask: 0.3\n" +
         "catalog:    true\n" +
         "tags:\n" +
-        "   - Shell\n" +
+        "   - \(tags)\n" +
         "---\n\n" +
         "# \(title)"
 
