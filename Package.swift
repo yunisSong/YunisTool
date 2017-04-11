@@ -3,7 +3,7 @@ import PackageDescription
 let package = Package(
     name: "YunisTool",
     targets: [
-        Target(name:"YunisTool",dependencies:["BlogPostTool"]),
+        Target(name:"BlogTool",dependencies:["BlogPostTool"]),
         Target(name:"BlogPostTool",dependencies:[]),
     ],
     dependencies:[
