@@ -14,7 +14,20 @@ public struct BlogPost {
         self.postTags = postTags
     }
     
-
+    //运行shell
+   public func runShellCommand(command: String) -> String? {
+        let pipe = Pipe()
+        let task = Process()
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", String(format: "%@", command)]
+        task.standardOutput = pipe
+        let file = pipe.fileHandleForReading
+        task.launch()
+        guard let result = NSString(data: file.readDataToEndOfFile(), encoding: String.Encoding.utf8.rawValue)?.trimmingCharacters(in: NSCharacterSet.newlines) else {
+            return nil
+        }
+        return result as String
+    }
     //新建文件
     public func creatNewPost()
     {
@@ -109,19 +122,6 @@ public struct BlogPost {
         
     }
 
-    //运行shell
-    func runShellCommand(command: String) -> String? {
-        let pipe = Pipe()
-        let task = Process()
-        task.launchPath = "/bin/sh"
-        task.arguments = ["-c", String(format: "%@", command)]
-        task.standardOutput = pipe
-        let file = pipe.fileHandleForReading
-        task.launch()
-        guard let result = NSString(data: file.readDataToEndOfFile(), encoding: String.Encoding.utf8.rawValue)?.trimmingCharacters(in: NSCharacterSet.newlines) else {
-            return nil
-        }
-        return result as String
-    }
+
     
 }

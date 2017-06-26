@@ -17,8 +17,10 @@ let tags = StringOption(shortFlag: "m",longFlag: "tags",
 let help = BoolOption(shortFlag: "h", longFlag: "help",
                       helpMessage: "这是一个提高效率的工具集")
 
+let serviceRun = StringOption(shortFlag: "s", longFlag: "serviceRun",
+                      helpMessage: "运行查看效果")
 
-cli.addOptions(filePath, title, tags, help)
+cli.addOptions(filePath, title, tags, help,serviceRun)
 
 
 
@@ -46,23 +48,36 @@ do {
     exit(EX_USAGE)
 }
 
-
-
 let blogPostPath = filePath.value ?? "/Users/Yunis/Documents/GitHub/yunisSong.github.io/_posts"
 let postTitle = title.value ?? "默认标题"
 let postTags = tags.value ?? ""
-
-
+let serviceRun0 = serviceRun.value ?? "01"
 
 
 print("blogPostPath = \(blogPostPath)")
-
-
 print("postTitle = \(postTitle)")
-
 print("postTags = \(postTags)")
+
 
 let ci = BlogPost.init(postFilePath: blogPostPath, postTitlle: postTitle, postTags: postTags)
 
-ci.creatNewPost()
+
+if serviceRun.wasSet
+{
+    print("运行工具".magenta)
+    ci.runShellCommand(command: "cd /Users/Yunis/Documents/GitHub/yunisSong.github.io;jekyll s;open http://127.0.0.1:4000/")
+    print("进入当前文件夹".magenta)
+
+
+
+
+}else
+{
+    ci.creatNewPost()
+ 
+}
+
+
+
+
 
