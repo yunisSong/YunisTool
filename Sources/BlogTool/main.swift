@@ -51,7 +51,7 @@ let blogPostPath = filePath.value ?? "/Users/Yunis/Documents/Github/yunisSong.gi
 let postTitle = title.value ?? "默认标题"
 let postTags = tags.value ?? ""
 let serviceRun0 = serviceRun.value ?? "01"
-let commitCode0 = commitCode.value ?? "01"
+let commitCode0 = commitCode.value ?? "默认提交内容"
 
 
 print("blogPostPath = \(blogPostPath)")
@@ -69,7 +69,7 @@ if serviceRun.wasSet
 }else if commitCode.wasSet
 {
     print("*******开始提交代码*******".magenta)
-    ci.runShellCommand(command: "cd /Users/Yunis/Documents/Github/yunisSong.github.io;jekyll s;open http://127.0.0.1:4000/")
+    ci.runShellCommand(command: "cd /Users/Yunis/Documents/Github/yunisSong.github.io;git add .;git commit -m \"\(commitCode0)\";git push")
     print("*******提交代码完成*******".magenta)
 }
 else
