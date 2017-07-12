@@ -5,6 +5,7 @@
 
 #### 安装方式
 1. $ git clone https://github.com/yunisSong/YunisTool.git
+2. $ swift package generate-xcodeproj
 2. $  swift build
 3. $ swift build -c release
 4. $ cp ./.build/release/BlogTool /usr/local/bin/BlogTool
