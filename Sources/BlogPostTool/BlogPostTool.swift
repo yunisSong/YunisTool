@@ -37,6 +37,9 @@ public struct BlogPost {
         let time = self.getSysDate()
         //拼接得到文件路径
         let postPath = p + "\(time)-\(self.postTitlle).md"
+        
+        print("文件名为 \(postPath.string)".lightBlue)
+
         //创建文件
         let sucess = self.touchPostFile(path: postPath.url)
         if sucess

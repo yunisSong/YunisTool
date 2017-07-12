@@ -4,7 +4,6 @@ import Rainbow
 import BlogPostTool
 
 let cli = CommandLineKit.CommandLine()
-
 let filePath = StringOption(shortFlag: "f", longFlag: "file",
                             helpMessage: "文件路径")
 
@@ -18,11 +17,11 @@ let help = BoolOption(shortFlag: "h", longFlag: "help",
                       helpMessage: "这是一个提高效率的工具集")
 
 let serviceRun = StringOption(shortFlag: "s", longFlag: "serviceRun",
-                      helpMessage: "运行查看效果")
+                      helpMessage: "本地运行查看效果")
 
-cli.addOptions(filePath, title, tags, help,serviceRun)
-
-
+let commitCode = StringOption(shortFlag: "c", longFlag: "commitCode",
+                              helpMessage: "提交代码")
+cli.addOptions(filePath, title, tags, help,serviceRun,commitCode)
 
 cli.formatOutput = { s, type in
     var str: String
@@ -48,10 +47,11 @@ do {
     exit(EX_USAGE)
 }
 
-let blogPostPath = filePath.value ?? "/Users/Yunis/Documents/GitHub/yunisSong.github.io/_posts"
+let blogPostPath = filePath.value ?? "/Users/Yunis/Documents/Github/yunisSong.github.io/_posts"
 let postTitle = title.value ?? "默认标题"
 let postTags = tags.value ?? ""
 let serviceRun0 = serviceRun.value ?? "01"
+let commitCode0 = commitCode.value ?? "01"
 
 
 print("blogPostPath = \(blogPostPath)")
@@ -64,15 +64,18 @@ let ci = BlogPost.init(postFilePath: blogPostPath, postTitlle: postTitle, postTa
 
 if serviceRun.wasSet
 {
-    print("运行工具".magenta)
-    ci.runShellCommand(command: "cd /Users/Yunis/Documents/GitHub/yunisSong.github.io;jekyll s;open http://127.0.0.1:4000/")
-    print("进入当前文件夹".magenta)
-
-
-
-
-}else
+    print("******构建本地运行版本******".magenta)
+    ci.runShellCommand(command: "cd /Users/Yunis/Documents/Github/yunisSong.github.io;jekyll s;open http://127.0.0.1:4000/")
+}else if commitCode.wasSet
 {
+    print("*******开始提交代码*******".magenta)
+    ci.runShellCommand(command: "cd /Users/Yunis/Documents/Github/yunisSong.github.io;jekyll s;open http://127.0.0.1:4000/")
+    print("*******提交代码完成*******".magenta)
+}
+else
+{
+    print("*******创建新文章*******".magenta)
+
     ci.creatNewPost()
  
 }
