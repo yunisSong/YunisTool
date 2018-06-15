@@ -21,6 +21,11 @@ let serviceRun = StringOption(shortFlag: "s", longFlag: "serviceRun",
 
 let commitCode = StringOption(shortFlag: "c", longFlag: "commitCode",
                               helpMessage: "提交代码")
+
+let updateDescription = StringOption(shortFlag: "d", longFlag: "description",
+                              helpMessage: "提交到蒲公英的信息")
+
+
 cli.addOptions(filePath, title, tags, help,serviceRun,commitCode)
 
 cli.formatOutput = { s, type in
@@ -65,7 +70,7 @@ let ci = BlogPost.init(postFilePath: blogPostPath, postTitlle: postTitle, postTa
 if serviceRun.wasSet
 {
     print("******构建本地运行版本******".magenta)
-    ci.runShellCommand(command: "cd /Users/Yunis/Documents/Github/yunisSong.github.io;jekyll s;open http://127.0.0.1:4000/")
+    ci.runShellCommand(command: "open http://127.0.0.1:4000/;cd /Users/Yunis/Documents/Github/yunisSong.github.io;jekyll s;")
 }else if commitCode.wasSet
 {
     print("*******开始提交代码*******".magenta)
