@@ -8,18 +8,20 @@ updateDescription = ""
 updateInfoFile = "/Users/XXX/updateDescription.txt"
 
 def inputServer():
-    print(colored("输入服务器地址,服务器地址如下：","blue"))
+    print(colored("输入服务器地址,输入对应序号即可,服务器地址如下：","blue"))
     print(colored("""
-    "测试内网138": "http://XXXXXX:8082",
-    "测试外网119": "http://XXXXXX:8082",
-    "测试Https138": "https://XXXXXX.cn",
-    "验收环境": "http://XXXXXX:8000",
-    "Https验收环境": "https://XXXXXX:8083",
-    "生产环境": "http://XXXXXX:8000",
-    "生产https环境": "https://XXXXXXX",
+    "1. 测试内网138": "http://XXXXXX:8082",
+    "2. 测试外网119": "http://XXXXXX:8082",
+    "3. 测试Https138": "https://XXXXXX.cn",
+    "4. 验收环境": "http://XXXXXX:8000",
+    "5. Https验收环境": "https://XXXXXX:8083",
+    "6. 生产环境": "http://XXXXXX:8000",
+    "7. 生产https环境": "https://XXXXXXX",
         ""","yellow"))
-    address = input()
+    inputIndex = input()
     servers = ["测试内网138","测试外网119","测试Https138","验收环境","Https验收环境","生产环境","生产https环境"]
+    address = servers[int(inputIndex) - 1]
+    print(address)
     if address not in servers:
         print(colored("请输入正确的服务器地址","red"))
         inputServer()
@@ -59,3 +61,9 @@ def file_write():
     updateInfo=f.read()
     f.close()
     return updateInfo
+
+def main():
+    ser = inputServer()
+    inputUpdateInfo(ser)
+
+main()
