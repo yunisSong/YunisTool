@@ -47,7 +47,11 @@ def inputUpdateInfo(server):
 
 
 def file_write():
-    f = open(updateInfoFile, 'w')
+    try:
+        f = open(updateInfoFile, 'w')
+    except Exception as e:
+        print(colored("请输入正确的文本地址 ： updateInfoFile","red"))
+        sys.exit()
     print('请输入内容【单独输入\':q\'保存退出】：')
     while True:
         file_content = input()
